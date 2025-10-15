@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Remove a faixa de debug
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         fontFamily: 'Roboto',
@@ -291,8 +291,16 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/catpaws.png'),
+            fit: BoxFit.cover,
+            opacity: 0.3, // Ajuste a opacidade conforme necessário
+          ),
+        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
           // Fixed design canvas like Android XML (516dp width). Scale down on small screens.
           const designW = 516.0;
           final availableW = constraints.maxWidth;
@@ -311,7 +319,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   children: [
                     // cards background (516x659dp)
                     Positioned(
-                      top: 0,
+                      top: 2,
                       left: 0,
                       width: px(516),
                       height: px(659),
@@ -320,7 +328,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
                     // cat (161x155dp) with 4dp margin top, centered horizontally
                     Positioned(
-                      top: px(4),
+                      top: px(5),
                       left: (px(516) - px(161)) / 2,
                       width: px(161),
                       height: px(155),
@@ -349,33 +357,33 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
                     // Left labels
                     Positioned(
-                      top: px(200),
-                      left: px(516 * 0.2) - px(20),
-                      child: const Text('Data', style: TextStyle(fontSize: 15)),
+                      top: px(200), // posição vertical do primeiro label
+                      left: px(650* 0.2) - px(20), // posição horizontal do primeiro label
+                      child: const Text('Data 1', style: TextStyle(fontSize: 15)),
                     ),
                     Positioned(
-                      top: px(246),
-                      left: px(516 * 0.2) - px(25),
-                      child: const Text('Tempo', style: TextStyle(fontSize: 15)),
+                      top: px(280), // posição vertical do segundo label
+                      left: px(650* 0.2) - px(20), // posição horizontal do segundo label
+                      child: const Text('Tempo 1', style: TextStyle(fontSize: 15)),
                     ),
 
                     // Right labels
                     Positioned(
-                      top: px(199),
-                      left: px(516 * 0.8) - px(20),
-                      child: const Text('Data', style: TextStyle(fontSize: 15)),
+                      top: px(199), // posição vertical do primeiro label
+                      left: px(516 * 0.7) - px(65), // posição horizontal do primeiro label
+                      child: const Text('Data 2', style: TextStyle(fontSize: 15)),
                     ),
                     Positioned(
-                      top: px(250),
-                      left: px(516 * 0.8) - px(25),
-                      child: const Text('Tempo', style: TextStyle(fontSize: 15)),
+                     top: px(280), // posição vertical do segundo label
+                      left: px(516 * 0.7) - px(65), // posição horizontal do segundo label
+                      child: const Text('Tempo 2', style: TextStyle(fontSize: 15)),
                     ),
 
-                    // Inputs left (width ~180dp)
+                    // Inputs left (width ~180dp) data e hora
                     Positioned(
                       top: px(215), // posição vertical
-                      left: px(980 * 0.2) - px(150), // posição horizontal
-                      width: px(150), // largura
+                      left: px(980 * 0.3) - px(190), // posição horizontal
+                      width: px(120), // largura
                       child: TextField(
                         controller: _date1, // controlador do campo
                         readOnly: true, // campo somente leitura
@@ -385,8 +393,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     ),
                     Positioned(
                       top: px(320), // posição vertical
-                      left: px(1000 * 0.2) - px(90), // posição horizontal
-                      width: px(150), // largura
+                      left: px(980 * 0.3) - px(190), // posição horizontal
+                      width: px(120),  // largura
                       child: TextField(
                         controller: _time1, // controlador do campo
                         readOnly: true, // campo somente leitura
@@ -398,8 +406,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     // Inputs right
                     Positioned(
                       top: px(219), // posição vertical
-                      left: px(516 * 0.8) - px(100), // posição horizontal
-                      width: px(150), // largura
+                      left: px(516 * 0.8) - px(120), // posição horizontal
+                      width: px(120), // largura
                       child: TextField(
                         controller: _date2, // controlador do campo
                         readOnly: true, // campo somente leitura
@@ -409,8 +417,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     ),
                     Positioned(
                       top: px(320),
-                      left: px(516 * 0.8) - px(90),
-                      width: px(150),
+                      left: px(516 * 0.8) - px(120), // posição horizontal
+                      width: px(120), 
                       child: TextField(
                         controller: _time2,
                         readOnly: true,
@@ -424,7 +432,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       Positioned(
                         top: px(528),
                         left: (px(516) - px(240)) / 2,
-                        width: px(240),
+                        width: px(250),
                         height: px(221),
                         child: Image.asset('assets/images/tres.png', fit: BoxFit.contain),
                       ),
@@ -456,7 +464,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     if (_resultado != null)
                       Positioned(
                         top: px(672),
-                        left: (px(516) - px(260)) / 2,
+                        left: (px(547) - px(230)) / 2,
                         child: Row(
                           children: [
                             const Icon(Icons.pets),
@@ -469,8 +477,9 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 ),
               ),
             ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
